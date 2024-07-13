@@ -1,7 +1,20 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
+const root = resolve(__dirname, 'src');
+const outDir = resolve(__dirname, 'dist');
+
 export default defineConfig({
-  plugins: [react()],
-})
+  base: 'https://mdurandop.io/expense-tracker',
+  root,
+  publicDir: '../public', 
+  build: {
+    outDir,
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: resolve(root, 'index.html')
+      }
+    }
+  }
+});
